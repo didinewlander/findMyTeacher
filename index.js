@@ -8,7 +8,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-
+const port = 8000
 const uri = process.env.MONGODB_CONNECTION_STRING;
 
 connectDB(uri);
@@ -19,6 +19,6 @@ app.get('/', function (req, res) {
     res.sendFile("movies.html", { root: "./App" })
 });
 
-app.listen(() => {
-    console.log('Site is online');
+app.listen(port, () => {
+    console.log('Site is online - ${port}');
 });
