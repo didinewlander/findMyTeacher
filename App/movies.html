@@ -390,8 +390,9 @@
                     let tr = document.createElement("tr");
                     tr.innerHTML = `<td>` + row.personName
                         + `</td><td><a href=wa.me/"` + row.phoneNumber
-                        + `">` + row.movieName
-                        + ` Description</a></td>`;
+                        + `">` + row.phoneNumber + `</a></td><td>` + row.subjects
+                        + `</td><td>` + row.lookingFor
+                        + `</td>`;
                     table.appendChild(tr);
                 }
                 movieList.appendChild(table);
