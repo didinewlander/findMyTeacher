@@ -19,6 +19,6 @@ app.get('/', function (req, res) {
     res.sendFile("movies.html", { root: "./App" })
 });
 
-app.listen(port, () => {
+app.listen(() => {
     console.log('Site is online');
 });
