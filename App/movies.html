@@ -240,10 +240,10 @@
 
 <body dir="rtl">
     <div class="navbar">
-        <button class="tablink" onclick="openPage('Home', this, 'purple')" id="defaultOpen">Home</button>
-        <button class="tablink" onclick="openPage('List', this, 'green')">List Of Movies</button>
-        <button class="tablink" onclick="openPage('Suggest', this, 'royalblue')">Suggest A Movie</button>
-        <button class="tablink" onclick="openPage('About', this, 'orange')">About</button>
+        <button class="tablink" onclick="openPage('Home', this, 'purple')" id="defaultOpen">דף הבית</button>
+        <button class="tablink" onclick="openPage('Suggest', this, 'royalblue')">עמוד הרשמה</button>
+        <button class="tablink" onclick="openPage('List', this, 'green')">רשימת הנרשמים</button>
+        <button class="tablink" onclick="openPage('About', this, 'orange')">אודות</button>
 
     </div>
     <div id="Home" class="tabcontent">
@@ -251,11 +251,11 @@
             <table>
                 <tr>
                     <td id="bigTitle">
-                        <h1>Home Page</h1>
-                        <h2>Welcome to the movie review website</h2>
+                        <h1>דף הבית</h1>
+                        <h2>אני רוצה להתכונן למבחן הסמסטר!</h2>
                     </td>
                     <td id="bigImage">
-                        <img src='https://usustatesman.com/wp-content/uploads/2017/01/movie-reviews-design.jpg'
+                        <img src='https://img.freepik.com/free-photo/front-view-male-student-dark-t-shirt-yellow-backpack-holding-files-books-smiling-light-blue-wall_140725-46715.jpg'
                             width="100%">
                     </td>
 
@@ -266,8 +266,8 @@
 
     <div id="List" class="tabcontent">
         <div class="box">
-            <h3>Movie List</h3>
-            <h4>Here you can walkthrough our movie list.</h4>
+            <h3>רשימת הנרשמים</h3>
+            <h4>כאן תוכלו לראות מי נרשם עבור מה ובאיזה מקצוע</h4>
             <div class="movieList" id="movieList">
                 <!-- Place Movies Here -->
             </div>
@@ -275,9 +275,9 @@
     </div>
 
     <div id="Suggest" class="tabcontent">
-        <h3>Suggest a movie</h3>
+        <h3>הרשמה</h3>
         <p>
-            Here you can post a name of a movie, with a link to IMDB, so we can add it to our list of movies.
+            כאן תוכלו להירשם לבקשת מתרגל בקורסים מסויימים, או להציע את עצמכם כמתרגלים
         </p>
         <div class="box">
             <form id="submitMovie" onsubmit="checkForm(event)" autocomplete="off">
@@ -319,9 +319,9 @@
     </div>
 
     <div id="About" class="tabcontent">
-        <h3>About</h3>
-        <p>Who we are and what we do.</p>
-    </div>
+        <h3>אודות</h3>
+        <p>אתר זה נוצר במיוחד עבור הסטודנטים של מכון לב. תהנו</p>
+    </div> 
 
     <script>
         function openPage(pageName, elmnt, color) {
@@ -365,7 +365,7 @@
             console.log(selected, phone);
             let data = { 'personName': event.target.personName.value, 'phoneNumber': phone, 'subjects': selected, 'lookingFor': event.target.lookingFor.value };
             console.log(data);
-            fetch('/persons', {
+            fetch('/person', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -373,7 +373,7 @@
                 body: JSON.stringify(data),
             })
                 .then((res, req) => res.json())
-                .then((data) => document.getElementById("result").innerHTML = "Movie Posted");
+                .then((data) => document.getElementById("result").innerHTML = "רשומה נשלחה בהצלחה");
         }
         // Get the element with id="defaultOpen" and click on it
         document.getElementById("defaultOpen").click();
@@ -384,19 +384,19 @@
             let topic = document.createElement("tr");
             topic.innerHTML = '<td>שם</td><td>מספר טלפון</td><td>מעוניין ב</td><td>ורוצה</td>';
             table.appendChild(topic);
-            // fetch('/persons').then(response => response.json()).then(data => {
-            //     for (const row of data) {
-            //         console.log(row)
-            //         let tr = document.createElement("tr");
-            //         tr.innerHTML = `<td>` + row.personName
-            //             + `</td><td><a href=wa.me/"` + row.phoneNumber
-            //             + `">` + row.phoneNumber + `</a></td><td>` + row.subjects
-            //             + `</td><td>` + row.lookingFor
-            //             + `</td>`;
-            //         table.appendChild(tr);
-            //     }
-            //     movieList.appendChild(table);
-            // });
+            fetch('/persons').then(response => response.json()).then(data => {
+                for (const row of data) {
+                    console.log(row)
+                    let tr = document.createElement("tr");
+                    tr.innerHTML = `<td>` + row.personName
+                        + `</td><td><a href=wa.me/"` + row.phoneNumber
+                        + `">` + row.phoneNumber + `</a></td><td>` + row.subjects
+                        + `</td><td>` + row.lookingFor
+                        + `</td>`;
+                    table.appendChild(tr);
+                }
+                movieList.appendChild(table);
+            });
 
             
         }

@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 mongoose.set('strictQuery', false);
 const connectDB = (uri) => {
     mongoose.connect(uri)
-        .then(() => console.log('Connected to moviesDB'))
+        .then(() => console.log('Connected to personsDB'))
         .catch((error) => console.log(error));
 }
 const connection = mongoose.connection;
