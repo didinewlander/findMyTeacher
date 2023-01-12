@@ -384,21 +384,21 @@
             let topic = document.createElement("tr");
             topic.innerHTML = '<td>שם</td><td>מספר טלפון</td><td>מעוניין ב</td><td>ורוצה</td>';
             table.appendChild(topic);
-            fetch('/persons').then(response => response.json()).then(data => {
-                for (const row of data) {
-                    console.log(row)
-                    let tr = document.createElement("tr");
-                    tr.innerHTML = `<td>` + row.personName
-                        + `</td><td><a href=wa.me/"` + row.phoneNumber
-                        + `">` + row.phoneNumber + `</a></td><td>` + row.subjects
-                        + `</td><td>` + row.lookingFor
-                        + `</td>`;
-                    table.appendChild(tr);
-                }
-                movieList.appendChild(table);
-            }
+            // fetch('/persons').then(response => response.json()).then(data => {
+            //     for (const row of data) {
+            //         console.log(row)
+            //         let tr = document.createElement("tr");
+            //         tr.innerHTML = `<td>` + row.personName
+            //             + `</td><td><a href=wa.me/"` + row.phoneNumber
+            //             + `">` + row.phoneNumber + `</a></td><td>` + row.subjects
+            //             + `</td><td>` + row.lookingFor
+            //             + `</td>`;
+            //         table.appendChild(tr);
+            //     }
+            //     movieList.appendChild(table);
+            // });
 
-            );
+            
         }
         function cleanList() {
             document.getElementById("movieList").innerHTML = "";
