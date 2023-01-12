@@ -7,6 +7,7 @@ const movieSchema = new mongoose.Schema(
     {
         personName: String,
         phoneNumber: String,
+        subjects: Array,
         lookingFor: String
     },
     { versionKey: false }

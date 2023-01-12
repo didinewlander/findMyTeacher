@@ -9,17 +9,16 @@ app.use(cors());
 app.use(express.json());
 
 
-const port = 8000;
 const uri = process.env.MONGODB_CONNECTION_STRING;
 
 connectDB(uri);
 
-app.use(express.urlencoded({ extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use('/persons', movieRouter);
 app.get('/', function (req, res) {
     res.sendFile("movies.html", { root: "./App" })
 });
- 
+
 app.listen(port, () => {
-    console.log('listening on port http://localhost:' + port);
+    console.log('Site is online');
 });

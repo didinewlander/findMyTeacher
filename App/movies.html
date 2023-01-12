@@ -19,8 +19,6 @@
             font-weight: Thin;
         }
 
-
-
         a {
             color: rgb(0, 100, 200);
             text-decoration: none;
@@ -43,7 +41,7 @@
             width: 100%;
             position: relative;
             border-bottom: 2px dotted var(--text-color);
-            margin: 4rem auto 1rem;
+            margin: 2rem auto 1rem;
         }
 
         .label {
@@ -240,7 +238,7 @@
 
 </head>
 
-<body>
+<body dir="rtl">
     <div class="navbar">
         <button class="tablink" onclick="openPage('Home', this, 'purple')" id="defaultOpen">Home</button>
         <button class="tablink" onclick="openPage('List', this, 'green')">List Of Movies</button>
@@ -283,37 +281,38 @@
         </p>
         <div class="box">
             <form id="submitMovie" onsubmit="checkForm(event)" autocomplete="off">
-                <div class="field"><label for="personName" class="label">שם מלא:</label>
-                    <input type="text" onfocus="this.value=''" name="personName" class="input" id="personName"
-                        value="שם מלא">
+                <div class="field">
+                    <h3>שם מלא</h3>
+                    <input type="text" onfocus="this.value=''" name="personName" class="input" id="personName">
                 </div>
                 <div class="field">
-                    <label for="phoneNumber" class="label">מספר נייד</label><br>
-                    <input type="tel" onfocus="this.value=''" name="phoneNumber" class="input" id="phoneNumber"
-                        value="מספר נייד">
+                    <h3>מספר טלפון</h3>
+                    <input type="tel" onfocus="this.value=''" name="phoneNumber" class="input" id="phoneNumber">
                 </div>
-                <div class="field">
-                    <label for="subjects" class="label">מקצועות למידה</label>
-                    <input type="checkbox" id="madmach" name="madmach" value="madmach">
+                <br />
+                <div>
+                    <h3>מקצועות למידה</h3>
+                    <input type="checkbox" class="checkbox" id="madmach" name="madmach" value="madmach">
                     <label for="madmach"> מבוא למדמ"ח</label>
-                    <input type="checkbox" id="sifratiot" name="sifratiot" value="sifratiot">
+                    <input type="checkbox" class="checkbox" id="sifratiot" name="sifratiot" value="sifratiot">
                     <label for="sifratiot"> מערכות ספרתיות</label>
-                    <input type="checkbox" id="linear1" name="linear1" value="linear1">
+                    <input type="checkbox" class="checkbox" id="linear1" name="linear1" value="linear1">
                     <label for="linear1"> לינארית א</label>
-                    <input type="checkbox" id="infi1" name="infi1" value="infi1">
+                    <input type="checkbox" class="checkbox" id="infi1" name="infi1" value="infi1">
                     <label for="infi1"> אינפי א</label>
                     <!--<input type="tel" onfocus="this.value=''" name="subjects" class="input" id="subjects"
                         value="מספר נייד">-->
                 </div>
-                <div class="field">
-                    <label for="lookingFor" class="label">מעוניינ/ת ב</label><br />
+                <br />
+                <div>
+                    <h3>אני רוצה</h3>
                     <input type="radio" id="teaching" name="lookingFor" value="teaching">
-                    <label for="lookingFor"> ללמד לאחרים</label>
+                    <label for="lookingFor"> ללמד </label>
                     <input type="radio" id="learning" name="lookingFor" value="learning">
-                    <label for="lookingFor"> ללמוד ממישהו</label>
+                    <label for="lookingFor"> ללמוד </label>
                 </div>
                 <br>
-                <button class="button-55" formnovalidate="formnovalidate">Submit</button>
+                <button class="button-55" formnovalidate="formnovalidate">שליחה</button>
             </form>
             <p id="result"></p>
         </div>
@@ -345,9 +344,27 @@
                 cleanList();
         }
 
+        let checkboxs = document.querySelectorAll('.checkbox');
+        let selected = [];
+        for (var box of checkboxs) {
+            box.addEventListener('click', function () {
+                if (this.checked == true) {
+                    selected.push(this.value);
+                }
+                else { console.log("Checkbox"); }
+            })
+        }
         function checkForm(event) {
             event.preventDefault();
-            let data = { 'personName': event.target.personName.value, 'phoneNumber': event.target.phoneNumber.value, 'lookingFor': event.target.lookingFor.value };
+            let phone = document.getElementById("phoneNumber").value;
+
+            if (phone[0] == "0") {
+                phone = "+972" + phone.slice(1, phone.length);
+            }
+
+            console.log(selected, phone);
+            let data = { 'personName': event.target.personName.value, 'phoneNumber': phone, 'subjects': selected, 'lookingFor': event.target.lookingFor.value };
+            console.log(data);
             fetch('/persons', {
                 method: 'POST',
                 headers: {
@@ -364,12 +381,15 @@
         function loadList() {
             let movieList = document.getElementById("movieList");
             let table = document.createElement("table");
+            let topic = document.createElement("tr");
+            topic.innerHTML = '<td>שם</td><td>מספר טלפון</td><td>מעוניין ב</td><td>ורוצה</td>';
+            table.appendChild(topic);
             fetch('/persons').then(response => response.json()).then(data => {
                 for (const row of data) {
                     console.log(row)
                     let tr = document.createElement("tr");
-                    tr.innerHTML = `<td>` + row.movieName
-                        + `</td><td><a href="` + row.movieLink
+                    tr.innerHTML = `<td>` + row.personName
+                        + `</td><td><a href=wa.me/"` + row.phoneNumber
                         + `">` + row.movieName
                         + ` Description</a></td>`;
                     table.appendChild(tr);
