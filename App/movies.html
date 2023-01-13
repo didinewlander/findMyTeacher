@@ -240,11 +240,10 @@
 
 <body dir="rtl">
     <div class="navbar">
-        <button class="tablink" onclick="openPage('Home', this, 'purple')" id="defaultOpen">דף הבית</button>
-        <button class="tablink" onclick="openPage('Suggest', this, 'royalblue')">עמוד הרשמה</button>
-        <button class="tablink" onclick="openPage('List', this, 'green')">רשימת הנרשמים</button>
         <button class="tablink" onclick="openPage('About', this, 'orange')">אודות</button>
-
+        <button class="tablink" onclick="openPage('List', this, 'green')">רשימת הנרשמים</button>
+        <button class="tablink" onclick="openPage('Suggest', this, 'royalblue')">עמוד הרשמה</button>
+        <button class="tablink" onclick="openPage('Home', this, 'purple')" id="defaultOpen">דף הבית</button>
     </div>
     <div id="Home" class="tabcontent">
         <div class="mainbox">
@@ -365,7 +364,7 @@
             console.log(selected, phone);
             let data = { 'personName': event.target.personName.value, 'phoneNumber': phone, 'subjects': selected, 'lookingFor': event.target.lookingFor.value };
             console.log(data);
-            fetch('/person', {
+            fetch('/persons', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
