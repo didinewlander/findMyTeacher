@@ -298,7 +298,7 @@
                 </div>
                 <br />
                 <div>
-                    <h3>מקצועות למידה</h3>
+                    <h3>מקצועות למידה - לסמן מימין למקצוע</h3>
                     <input type="checkbox" class="checkbox" id="madmach" name="madmach" value="madmach">
                     <label for="madmach"> מבוא למדמ"ח</label>
                     <input type="checkbox" class="checkbox" id="sifratiot" name="sifratiot" value="sifratiot">
@@ -387,7 +387,13 @@
                 body: JSON.stringify(data),
             })
                 .then((res, req) => res.json())
-                .then((data) => document.getElementById("result").innerHTML = "רשומה נשלחה בהצלחה");
+                .then((data) => {
+                    document.getElementById("result").innerHTML = "רשומה נשלחה בהצלחה";
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 3000);
+                });
+            ;
         }
         // Get the element with id="defaultOpen" and click on it
         document.getElementById("defaultOpen").click();
