@@ -385,23 +385,23 @@
             let movieList = document.getElementById("movieList");
             let table = document.createElement("table");
             let topic = document.createElement("tr");
-            topic.innerHTML = '<td>שם</td><td>מספר טלפון</td><td>מעוניין ב</td><td>ורוצה</td>';
+            topic.innerHTML = '<td>שם</td><td>מספר טלפון</td><td>במקצוע</td><td>ורוצה</td>';
             table.appendChild(topic);
             fetch('/persons').then(response => response.json()).then(data => {
                 for (const row of data) {
                         let subjects = [];
                         for (const subject of row.subjects) {
-                            if (subject == 'madmach') subjects.push("מבוא למדמח");
-                            if (subject == 'sifratiot') subjects.push("ספרתיות");
-                            if (subject == 'linear1') subjects.push("לינארית א");
-                            if (subject == 'infi1') subjects.push("אינפי א");
+                            if (subject === "madmach") subjects.push("מבוא למדמח");
+                            if (subject === "sifratiot") subjects.push("ספרתיות");
+                            if (subject === "linear1") subjects.push("לינארית א");
+                            if (subject === "infi1") subjects.push("אינפי א");
                         }
                     let tr = document.createElement("tr");
                     tr.classList.add(row.lookingFor);
                     tr.innerHTML = `<td>` + row.personName
                         + `</td><td><a href="https://wa.me/` + row.phoneNumber
                         + `">` + row.phoneNumber + `</a></td><td>` + row.subjects
-                        + `</td><td>` + row.lookingFor
+                        + `</td><td>` + (row.lookingFor === "teaching" ? "ללמד" : "ללמוד")
                         + `</td>`;
                     table.appendChild(tr);
                 }
