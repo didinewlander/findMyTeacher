@@ -15,7 +15,7 @@ const movieSchema = new mongoose.Schema(
 
 
 // A 'model' is a class with which we construct documents in a collection
-const Movie = mongoose.model('person', movieSchema);
+const Movie = mongoose.model('persons', movieSchema);
 // The first argument is the singular name of the collection that will be created for the model (Mongoose will create the database collection for the above model 'person').
 // The second argument is the schema to use in creating the model.
 
