@@ -2,8 +2,7 @@
 <html>
 
 <head>
-    <title>The Movie Index</title>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <title>נרשמים ולומדים</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Heebo:Regular|Bold|Thin">
     <style>
         * {
@@ -176,6 +175,15 @@
             display: none;
         }
 
+        .teaching {
+            background: rgb(255, 161, 161);
+        }
+
+        .learning {
+            background: rgb(161, 222, 255);
+
+        }
+
         #Home {
             background-color: white;
             overflow-x: auto;
@@ -320,7 +328,7 @@
     <div id="About" class="tabcontent">
         <h3>אודות</h3>
         <p>אתר זה נוצר במיוחד עבור הסטודנטים של מכון לב. תהנו</p>
-    </div> 
+    </div>
 
     <script>
         function openPage(pageName, elmnt, color) {
@@ -385,10 +393,22 @@
             table.appendChild(topic);
             fetch('/persons').then(response => response.json()).then(data => {
                 for (const row of data) {
-                    console.log(row)
+                    try {
+                        let subjects = [];
+                        for (const subject of row.subjects) {
+                            if (subject == 'madmach') subjects.push("מבוא למדמח");
+                            if (subject == 'sifratiot') subjects.push("ספרתיות");
+                            if (subject == 'linear1') subjects.push("לינארית א");
+                            if (subject == 'infi1') subjects.push("אינפי א");
+                        }
+
+                    } catch (error) {
+                        console.log(error);
+                    }
                     let tr = document.createElement("tr");
+                    tr.classList.add(row.lookingFor);
                     tr.innerHTML = `<td>` + row.personName
-                        + `</td><td><a href=wa.me/"` + row.phoneNumber
+                        + `</td><td><a href="wa.me/` + row.phoneNumber
                         + `">` + row.phoneNumber + `</a></td><td>` + row.subjects
                         + `</td><td>` + row.lookingFor
                         + `</td>`;
@@ -397,7 +417,7 @@
                 movieList.appendChild(table);
             });
 
-            
+
         }
         function cleanList() {
             document.getElementById("movieList").innerHTML = "";
