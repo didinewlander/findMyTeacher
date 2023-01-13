@@ -370,7 +370,7 @@
             event.preventDefault();
             let phone = document.getElementById("phoneNumber").value;
             if (phone[0] == "0") {
-                phone = "+972" + phone.slice(1, phone.length);
+                phone = "972" + phone.slice(1, phone.length);
             }
 
             let data = { 'personName': event.target.personName.value, 'phoneNumber': phone, 'subjects': selected, 'lookingFor': event.target.lookingFor.value };
@@ -414,7 +414,7 @@
                     tr.classList.add(row.lookingFor);
                     tr.innerHTML = `<td>` + row.personName
                         + `</td><td><a href="https://wa.me/` + row.phoneNumber
-                        + `">` + row.phoneNumber + `</a></td><td>` + subjects
+                        + `">הודעה ישירה לווטסאפ</a></td><td>` + subjects
                         + `</td><td>` + (row.lookingFor === "teaching" ? "ללמד" : "ללמוד")
                         + `</td>`;
                     table.appendChild(tr);
