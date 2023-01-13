@@ -290,11 +290,11 @@
             <form id="submitMovie" onsubmit="checkForm(event)" autocomplete="off">
                 <div class="field">
                     <h3>שם מלא</h3>
-                    <input type="text" onfocus="this.value=''" name="personName" class="input" id="personName">
+                    <input type="text" name="personName" class="input" id="personName">
                 </div>
                 <div class="field">
                     <h3>מספר טלפון</h3>
-                    <input type="tel" onfocus="this.value=''" name="phoneNumber" class="input" id="phoneNumber">
+                    <input type="tel" name="phoneNumber" class="input" id="phoneNumber">
                 </div>
                 <br />
                 <div>
@@ -314,8 +314,6 @@
                     <label for="python"> פייתון</label>
                     <input type="checkbox" class="checkbox" id="histabroot" name="histabroot" value="histabroot">
                     <label for="histabroot">הסתברות</label>
-                    <!--<input type="tel" onfocus="this.value=''" name="subjects" class="input" id="subjects"
-                        value="מספר נייד">-->
                 </div>
                 <br />
                 <div>
@@ -335,6 +333,7 @@
     <div id="About" class="tabcontent">
         <h3>אודות</h3>
         <p>אתר זה נוצר במיוחד עבור הסטודנטים של מכון לב. תהנו</p>
+        <h3>אם יש תקלה באתר ניתן ליצור איתי קשר בווטסאפ <a href="https://wa.me/972584242529">כאן</a></h3>
     </div>
 
     <script>
@@ -377,7 +376,7 @@
             let data = { 'personName': event.target.personName.value, 'phoneNumber': phone, 'subjects': selected, 'lookingFor': event.target.lookingFor.value };
             if (data.personName === "") { alert("לא הזנת את השם! חובה לרשום שם מלא"); return; }
             if (data.phoneNumber === "" || (/^([0-9]+-)*([0-9]+)$/.test(phone)) == false) { alert("יש משהו לא בסדר עם המספר טלפון"); return; }
-            if (data.subjects.length == 0) { alert("אם לא בחרת מקצוע, למה הגעת לכאן?"); return; }
+            if (selected.length == 0) { alert("אם לא בחרת מקצוע, למה הגעת לכאן?"); return; }
             if (data.lookingFor === "") { alert("אני מכיר אחלה מטפל לאנשים שלא סגורים על עצמם"); return; }
 
             fetch('/persons', {
@@ -389,7 +388,6 @@
             })
                 .then((res, req) => res.json())
                 .then((data) => document.getElementById("result").innerHTML = "רשומה נשלחה בהצלחה");
-
         }
         // Get the element with id="defaultOpen" and click on it
         document.getElementById("defaultOpen").click();
