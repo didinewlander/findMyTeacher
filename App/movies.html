@@ -373,10 +373,11 @@
             if (phone[0] == "0") {
                 phone = "+972" + phone.slice(1, phone.length);
             }
+
             let data = { 'personName': event.target.personName.value, 'phoneNumber': phone, 'subjects': selected, 'lookingFor': event.target.lookingFor.value };
             if (data.personName === "") { alert("לא הזנת את השם! חובה לרשום שם מלא"); return; }
-            if (data.phoneNumber === "") { alert("לא הזנת מספר טלפון!"); return; }
-            if (data.subjects === []) { alert("אם לא בחרת מקצוע, למה הגעת לכאן?"); return; }
+            if (data.phoneNumber === "" || (/^([0-9]+-)*([0-9]+)$/.test(data.phoneNumber)) == false) { alert("יש משהו לא בסדר עם המספר טלפון"); return; }
+            if (data.subjects.length == 0) { alert("אם לא בחרת מקצוע, למה הגעת לכאן?"); return; }
             if (data.lookingFor === "") { alert("אני מכיר אחלה מטפל לאנשים שלא סגורים על עצמם"); return; }
 
             fetch('/persons', {
