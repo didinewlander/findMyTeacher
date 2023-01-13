@@ -369,21 +369,28 @@
         }
         function checkForm(event) {
             event.preventDefault();
+            let test = false;
             let phone = document.getElementById("phoneNumber").value;
-
             if (phone[0] == "0") {
                 phone = "+972" + phone.slice(1, phone.length);
             }
             let data = { 'personName': event.target.personName.value, 'phoneNumber': phone, 'subjects': selected, 'lookingFor': event.target.lookingFor.value };
-            fetch('/persons', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            })
-                .then((res, req) => res.json())
-                .then((data) => document.getElementById("result").innerHTML = "רשומה נשלחה בהצלחה");
+            if (data.personName === "") { alert("לא הזנת את השם! חובה לרשום שם מלא"); return; }
+            if (data.phoneNumber === "") { alert("לא הזנת מספר טלפון!"); return; }
+            if (data.subjects == [])  { alert("אם לא בחרת מקצוע, למה הגעת לכאן?"); return; }
+            if (data.lookingFor === "")  { alert("אני מכיר אחלה מטפל לאנשים שלא סגורים על עצמם"); return; }
+
+                if (test) {
+                    fetch('/persons', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data),
+                    })
+                        .then((res, req) => res.json())
+                        .then((data) => document.getElementById("result").innerHTML = "רשומה נשלחה בהצלחה");
+                }
         }
         // Get the element with id="defaultOpen" and click on it
         document.getElementById("defaultOpen").click();
@@ -405,8 +412,6 @@
                         if (subject === "physics") subjects.push("פיזיקה");
                         if (subject === "python") subjects.push("פייתון");
                         if (subject === "histabroot") subjects.push("הסתברות");
-
-
                     }
                     let tr = document.createElement("tr");
                     tr.classList.add(row.lookingFor);
