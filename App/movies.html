@@ -126,7 +126,11 @@
         }
 
         .mainbox {
-            background: white;
+            background:url('https://img.freepik.com/free-photo/front-view-male-student-dark-t-shirt-yellow-backpack-holding-files-books-smiling-light-blue-wall_140725-46715.jpg');
+            background-repeat: no-repeat;
+            color:white;
+            text-shadow:2px 2px 5px #000000;
+            background-size: 100%;
             padding: 2em;
             position: relative;
             width: 100%;
@@ -255,19 +259,8 @@
     </div>
     <div id="Home" class="tabcontent">
         <div class="mainbox">
-            <table>
-                <tr>
-                    <td id="bigTitle">
-                        <h1>דף הבית</h1>
-                        <h2>אני רוצה להתכונן למבחן הסמסטר!</h2>
-                    </td>
-                    <td id="bigImage">
-                        <img src='https://img.freepik.com/free-photo/front-view-male-student-dark-t-shirt-yellow-backpack-holding-files-books-smiling-light-blue-wall_140725-46715.jpg'
-                            width="100%">
-                    </td>
-
-                </tr>
-            </table>
+            <h1>המבחנים בפתח וכולנו... במתח?</h1>
+            <h2>מאגר המחפשים/מלמדים לקראת תקופת המבחנים הקרובה (בהרצה)</h2>
         </div>
     </div>
 
@@ -327,6 +320,7 @@
                 <button class="button-55" formnovalidate="formnovalidate">שליחה</button>
             </form>
             <p id="result"></p>
+            <h2>אנא וודאו שמה שנרשמתם אליו מופיע בצורה תקינה ברשימה</h2>
         </div>
     </div>
 
@@ -409,13 +403,13 @@
                 for (const row of data) {
                     let subjects = [];
                     for (const subject of row.subjects) {
-                        if (subject === "madmach") subjects.push("מבוא למדמח");
-                        if (subject === "sifratiot") subjects.push("מערכות ספרתיות");
-                        if (subject === "linear1") subjects.push("לינארית א");
-                        if (subject === "infi1") subjects.push("אינפי א");
-                        if (subject === "physics") subjects.push("פיזיקה");
-                        if (subject === "python") subjects.push("פייתון");
-                        if (subject === "histabroot") subjects.push("הסתברות");
+                        if (subject === "madmach") subjects.push("מבוא למדמח ");
+                        if (subject === "sifratiot") subjects.push("מערכות ספרתיות ");
+                        if (subject === "linear1") subjects.push("לינארית א ");
+                        if (subject === "infi1") subjects.push("אינפי א ");
+                        if (subject === "physics") subjects.push("פיזיקה ");
+                        if (subject === "python") subjects.push("פייתון ");
+                        if (subject === "histabroot") subjects.push("הסתברות ");
                     }
                     let tr = document.createElement("tr");
                     tr.classList.add(row.lookingFor);
