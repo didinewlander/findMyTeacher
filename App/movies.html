@@ -307,6 +307,13 @@
                     <label for="linear1"> לינארית א</label>
                     <input type="checkbox" class="checkbox" id="infi1" name="infi1" value="infi1">
                     <label for="infi1"> אינפי א</label>
+                    <br />
+                    <input type="checkbox" class="checkbox" id="physics" name="physics" value="physics">
+                    <label for="physics"> פיזיקה</label>
+                    <input type="checkbox" class="checkbox" id="python" name="python" value="python">
+                    <label for="python"> פייתון</label>
+                    <input type="checkbox" class="checkbox" id="histabroot" name="histabroot" value="histabroot">
+                    <label for="histabroot">הסתברות</label>
                     <!--<input type="tel" onfocus="this.value=''" name="subjects" class="input" id="subjects"
                         value="מספר נייד">-->
                 </div>
@@ -389,18 +396,23 @@
             table.appendChild(topic);
             fetch('/persons').then(response => response.json()).then(data => {
                 for (const row of data) {
-                        let subjects = [];
-                        for (const subject of row.subjects) {
-                            if (subject === "madmach") subjects.push("מבוא למדמח");
-                            if (subject === "sifratiot") subjects.push("ספרתיות");
-                            if (subject === "linear1") subjects.push("לינארית א");
-                            if (subject === "infi1") subjects.push("אינפי א");
-                        }
+                    let subjects = [];
+                    for (const subject of row.subjects) {
+                        if (subject === "madmach") subjects.push("מבוא למדמח");
+                        if (subject === "sifratiot") subjects.push("ספרתיות");
+                        if (subject === "linear1") subjects.push("לינארית א");
+                        if (subject === "infi1") subjects.push("אינפי א");
+                        if (subject === "physics") subjects.push("פיזיקה");
+                        if (subject === "python") subjects.push("פייתון");
+                        if (subject === "histabroot") subjects.push("הסתברות");
+
+
+                    }
                     let tr = document.createElement("tr");
                     tr.classList.add(row.lookingFor);
                     tr.innerHTML = `<td>` + row.personName
                         + `</td><td><a href="https://wa.me/` + row.phoneNumber
-                        + `">` + row.phoneNumber + `</a></td><td>` + row.subjects
+                        + `">` + row.phoneNumber + `</a></td><td>` + subjects
                         + `</td><td>` + (row.lookingFor === "teaching" ? "ללמד" : "ללמוד")
                         + `</td>`;
                     table.appendChild(tr);
