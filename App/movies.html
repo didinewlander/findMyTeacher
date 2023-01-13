@@ -374,8 +374,8 @@
             }
 
             let data = { 'personName': event.target.personName.value, 'phoneNumber': phone, 'subjects': selected, 'lookingFor': event.target.lookingFor.value };
-            if (data.personName === "") { alert("לא הזנת את השם! חובה לרשום שם מלא"); return; }
-            if (data.phoneNumber === "" || (/^([0-9]+-)*([0-9]+)$/.test(phone)) == false) { alert("יש משהו לא בסדר עם המספר טלפון"); return; }
+            if (data.personName === "" || (!(event.target.personName.value).split(/\W+/).length === 2)) { alert("נא לרשום את השם המלא בבקשה"); return; }
+            if (data.phoneNumber === "" || (/^([0-9]+-)*([0-9]+)$/.test(phone)) == false || phone.length < 12) { alert("יש משהו לא בסדר עם המספר טלפון"); return; }
             if (selected.length == 0) { alert("אם לא בחרת מקצוע, למה הגעת לכאן?"); return; }
             if (data.lookingFor === "") { alert("אני מכיר אחלה מטפל לאנשים שלא סגורים על עצמם"); return; }
 
@@ -391,7 +391,7 @@
                     document.getElementById("result").innerHTML = "רשומה נשלחה בהצלחה";
                     setTimeout(function () {
                         window.location.reload();
-                    }, 3000);
+                    }, 1000);
                 });
             ;
         }
@@ -409,7 +409,7 @@
                     let subjects = [];
                     for (const subject of row.subjects) {
                         if (subject === "madmach") subjects.push("מבוא למדמח");
-                        if (subject === "sifratiot") subjects.push("ספרתיות");
+                        if (subject === "sifratiot") subjects.push("מערכות ספרתיות");
                         if (subject === "linear1") subjects.push("לינארית א");
                         if (subject === "infi1") subjects.push("אינפי א");
                         if (subject === "physics") subjects.push("פיזיקה");
