@@ -176,11 +176,11 @@
         }
 
         .teaching {
-            background: rgb(255, 161, 161);
+            background: rgb(246, 247, 224);
         }
 
         .learning {
-            background: rgb(161, 222, 255);
+            background: rgb(209, 239, 255);
 
         }
 
@@ -358,7 +358,6 @@
                 if (this.checked == true) {
                     selected.push(this.value);
                 }
-                else { console.log("Checkbox"); }
             })
         }
         function checkForm(event) {
@@ -368,10 +367,7 @@
             if (phone[0] == "0") {
                 phone = "+972" + phone.slice(1, phone.length);
             }
-
-            console.log(selected, phone);
             let data = { 'personName': event.target.personName.value, 'phoneNumber': phone, 'subjects': selected, 'lookingFor': event.target.lookingFor.value };
-            console.log(data);
             fetch('/persons', {
                 method: 'POST',
                 headers: {
@@ -393,7 +389,6 @@
             table.appendChild(topic);
             fetch('/persons').then(response => response.json()).then(data => {
                 for (const row of data) {
-                    try {
                         let subjects = [];
                         for (const subject of row.subjects) {
                             if (subject == 'madmach') subjects.push("מבוא למדמח");
@@ -401,14 +396,10 @@
                             if (subject == 'linear1') subjects.push("לינארית א");
                             if (subject == 'infi1') subjects.push("אינפי א");
                         }
-
-                    } catch (error) {
-                        console.log(error);
-                    }
                     let tr = document.createElement("tr");
                     tr.classList.add(row.lookingFor);
                     tr.innerHTML = `<td>` + row.personName
-                        + `</td><td><a href="wa.me/` + row.phoneNumber
+                        + `</td><td><a href="https://wa.me/` + row.phoneNumber
                         + `">` + row.phoneNumber + `</a></td><td>` + row.subjects
                         + `</td><td>` + row.lookingFor
                         + `</td>`;
