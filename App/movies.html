@@ -126,10 +126,10 @@
         }
 
         .mainbox {
-            background:url('https://img.freepik.com/free-photo/front-view-male-student-dark-t-shirt-yellow-backpack-holding-files-books-smiling-light-blue-wall_140725-46715.jpg');
+            background: url('https://img.freepik.com/free-photo/front-view-male-student-dark-t-shirt-yellow-backpack-holding-files-books-smiling-light-blue-wall_140725-46715.jpg');
             background-repeat: no-repeat;
-            color:white;
-            text-shadow:2px 2px 5px #000000;
+            color: white;
+            text-shadow: 2px 2px 5px #000000;
             background-size: 100%;
             padding: 2em;
             position: relative;
@@ -309,6 +309,10 @@
                     <label for="histabroot">הסתברות</label>
                 </div>
                 <br />
+                <div class="field">
+                    <h3>הערה / נושא ספציפי</h3>
+                    <input type="text" name="comment" class="input" id="comment">
+                </div>
                 <div>
                     <h3>אני רוצה</h3>
                     <input type="radio" id="teaching" name="lookingFor" value="teaching">
@@ -364,11 +368,15 @@
             event.preventDefault();
             let phone = document.getElementById("phoneNumber").value;
             let name = document.getElementById("personName").value;
+            let comment = document.getElementById("comment").value;
             if (phone[0] == "0") {
                 phone = "972" + phone.slice(1, phone.length);
             }
+            if (comment.length == 0){
+                comment = "אין הערה";
+            }
 
-            let data = { 'personName': event.target.personName.value, 'phoneNumber': phone, 'subjects': selected, 'lookingFor': event.target.lookingFor.value };
+                let data = { 'personName': event.target.personName.value, 'phoneNumber': phone, 'subjects': selected, 'comment': comment, 'lookingFor': event.target.lookingFor.value };
             if (data.personName === "" || (name.split(" ").length < 2)) { alert("נא לרשום את השם המלא בבקשה"); return; }
             if (data.phoneNumber === "" || (/^([0-9]+-)*([0-9]+)$/.test(phone)) == false || phone.length < 12) { alert("יש משהו לא בסדר עם המספר טלפון"); return; }
             if (selected.length == 0) { alert("אם לא בחרת מקצוע, למה הגעת לכאן?"); return; }
@@ -417,7 +425,7 @@
                         + `</td><td><a href="https://wa.me/` + row.phoneNumber
                         + `">הודעה ישירה לווטסאפ</a></td><td>` + subjects
                         + `</td><td>` + (row.lookingFor === "teaching" ? "ללמד" : "ללמוד")
-                        + `</td>`;
+                        + `</td><td>` + row.comment + `</td>`;
                     table.appendChild(tr);
                 }
                 movieList.appendChild(table);
