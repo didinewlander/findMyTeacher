@@ -420,6 +420,10 @@
                         if (subject === "histabroot") subjects.push("הסתברות ");
                     }
                     let tr = document.createElement("tr");
+                    let comment = row.comment;
+                    if (comment === undefined){
+                        comment = "אין הערה מוכנה מראש, נא לפנות לידידיה לעדכון ההערה בטבלה";
+                    }
                     tr.classList.add(row.lookingFor);
                     tr.innerHTML = `<td>` + row.personName
                         + `</td><td><a href="https://wa.me/` + row.phoneNumber
