@@ -305,8 +305,19 @@
                     <label for="physics"> פיזיקה</label>
                     <input type="checkbox" class="checkbox" id="python" name="python" value="python">
                     <label for="python"> פייתון</label>
-                    <input type="checkbox" class="checkbox" id="histabroot" name="histabroot" value="histabroot">
-                    <label for="histabroot">הסתברות</label>
+                    <br/>
+                    <input type="checkbox" class="checkbox" id="OOP" name="OOP" value="OOP">
+                    <label for="OOP">סדנה</label>
+                    <input type="checkbox" class="checkbox" id="DS&A1" name="DS&A1" value="DS&A1">
+                    <label for="DS&A1">מבנה נתונים א</label>
+                    <input type="checkbox" class="checkbox" id="assembly" name="assembly" value="assembly">
+                    <label for="assembly">מבנה המחשב</label>
+                    <input type="checkbox" class="checkbox" id="assembly-lab" name="assembly-lab" value="assembly-lab">
+                    <label for="assembly-lab">מעבדה במבנה המחשב</label>
+                    <input type="checkbox" class="checkbox" id="linear2" name="linear2" value="linear2">
+                    <label for="linear2"> לינארית ב</label>
+                    <input type="checkbox" class="checkbox" id="infi2" name="infi2" value="infi2">
+                    <label for="infi2"> אינפי ב</label>
                 </div>
                 <br />
                 <div class="field">
@@ -364,6 +375,9 @@
                 if (this.checked == true) {
                     selected.push(this.value);
                 }
+                else {
+                    selected.pop(this.value);
+                }
             })
         }
         function checkForm(event) {
@@ -374,11 +388,11 @@
             if (phone[0] == "0") {
                 phone = "972" + phone.slice(1, phone.length);
             }
-            if (comment.length == 0){
+            if (comment.length == 0) {
                 comment = "אין הערה";
             }
 
-                let data = { 'personName': event.target.personName.value, 'phoneNumber': phone, 'subjects': selected, 'comment': comment, 'lookingFor': event.target.lookingFor.value };
+            let data = { 'personName': event.target.personName.value, 'phoneNumber': phone, 'subjects': selected, 'comment': comment, 'lookingFor': event.target.lookingFor.value };
             if (data.personName === "" || (name.split(" ").length < 2)) { alert("נא לרשום את השם המלא בבקשה"); return; }
             if (data.phoneNumber === "" || (/^([0-9]+-)*([0-9]+)$/.test(phone)) == false || phone.length < 12) { alert("יש משהו לא בסדר עם המספר טלפון"); return; }
             if (selected.length == 0) { alert("אם לא בחרת מקצוע, למה הגעת לכאן?"); return; }
@@ -420,10 +434,16 @@
                         if (subject === "physics") subjects.push("פיזיקה ");
                         if (subject === "python") subjects.push("פייתון ");
                         if (subject === "histabroot") subjects.push("הסתברות ");
+                        if (subject === "linear2") subjects.push("לינארית ב ");
+                        if (subject === "infi2") subjects.push("אינפי ב ");
+                        if (subject ==="OOP") subjects.push("סדנה ב-C++");
+                        if (subject ==="DS&A1") subjects.push("מבנה נתונים א' ");
+                        if (subject ==="assembly") subjects.push("מבנה המחשב ");
+                        if (subject ==="assembly-lab") subjects.push("מעבדה במבנה המחשב ");
                     }
                     let tr = document.createElement("tr");
                     let comment = row.comment;
-                    if (comment === undefined){
+                    if (comment === undefined) {
                         comment = "נא לפנות באודות לעדכון הערה";
                     }
                     tr.classList.add(row.lookingFor);
